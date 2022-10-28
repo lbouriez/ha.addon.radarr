@@ -19,7 +19,7 @@ COPY rootfs /
 
 # Base system
 WORKDIR /usr/src
-ARG BUILD_ARCH
+ARG BUILD_ARCH=amd64
 
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -30,13 +30,13 @@ RUN \
     set -o pipefail \
     \
     set -x \
-    && apt-get update && apt-get install -y --no-install-recommends \
+    && apk update && apk add --no-cache \
         bash \
         jq \
         tzdata \
         curl \
         ca-certificates \
-    \
+        \
     && mkdir -p /etc/fix-attrs.d \
     && mkdir -p /etc/services.d \
     \
@@ -54,5 +54,4 @@ RUN \
         "https://github.com/home-assistant/tempio/releases/download/${TEMPIO_VERSION}/tempio_${BUILD_ARCH}" \
     && chmod a+x /usr/bin/tempio \
     \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /usr/src/*
+    && rm -rf /var/cache/apk/*
