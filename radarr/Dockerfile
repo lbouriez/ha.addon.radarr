@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/linuxserver/radarr:amd64-4.0.0-nightly
+ARG BUILD_FROM=ghcr.io/linuxserver/radarr:amd64-4.3.1-nightly
 
 # hadolint ignore=DL3006
 FROM ${BUILD_FROM}
